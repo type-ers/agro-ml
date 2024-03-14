@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>AgroML | The future of agriculture</title>
+    
+    <link rel="stylesheet" href="./static/css/style.css">
+    <link rel="stylesheet" href="./static/css/globalstyles.css">    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
+    <script src="./static/js/main.js" defer></script>
+  </head>
+  <body>
+    <section class="fullvh">
+    <header>
+      <button class="mobile-navigation hide" aria-expanded="false"></button>
+        <nav>
+          <ul data-visible="false" class="navbar flex" id="navbar">
+                <li class="loginBig"><a href="./login.html" target="_blank">Login</a></li>
+                <li class="login"><a href="" target="_blank"><div class="login"></div></a></li>
+                <li><a href="#home" id="home">Home</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><a href="/disease" target="_blank">Disease Detection</a></li>
+                <li><a href="/fertilizer">Fertilizer Manager</a></li>
+                <li><a href="/market">Market Predictor</a></li>
+              </ul>
+        </nav>
+    </header>
+      <div class="container">
+        <div class="mainImage"><img src="{{ url_for('static', filename='images/main.svg') }}" draggable="false" alt="" ></div>
+        <div class="homeText clr-dark-secondary">
+          <h1 class="heading">Agro<span class="clr-green-primary bold">ML</span></h1>
+          <p>Your one-stop solution for precision agriculture. Our cutting-edge machine learning model revolutionizes farming practices by offering three key functionalities. With AgroML, farmers can optimize crop health, enhance fertilizer efficiency, and make informed decisions to maximize their yields. </p>
+        </div>
+      </div>
+    </section>
+    <section class="fullvh">
+      <div class="aboutContainer flex">
+        <h1 class="headingSmall clr-dark-secondary center" id="about">What we provide?</h1>
+        <div class="about">
+          <img src="{{ url_for('static', filename='images/disease.svg') }}" draggable="false" alt="">
+          <div class="aboutText">
+            <h2 class="clr-green-primary subHeading">Disease Detection</h2>
+            <p>At AgroML, we leverage advanced machine learning algorithms to detect and diagnose crop diseases with unparalleled accuracy. Our model analyzes plant images and identifies subtle signs of infections, enabling early intervention and targeted treatment.</p>
+          </div>
+        </div>
+        <div class="about">
+          <img src="{{ url_for('static', filename='images/fertilizer.svg') }}" draggable="false" alt="">
+          <div class="aboutText">
+            <h2 class="clr-green-primary subHeading">Fertilizer Management</h2>
+            <p>AgroML empowers farmers with precise fertilizer management solutions tailored to their specific soil conditions and crop requirements. By inputting soil data and other relevant parameters, our model recommends the optimal type of fertilizers and their respective proportions, ensuring efficient nutrient uptake and healthy crop growth.</p>
+          </div>
+        </div>
+        <div class="about">
+          <img src="{{ url_for('static', filename='images/market.svg') }}" draggable="false" alt="">
+          <div class="aboutText">
+            <h2 class="clr-green-primary subHeading">Market Predictor</h2>
+            <p>With AgroML's market prediction feature, farmers can make informed decisions based on real-time insights into crop prices and market trends. Our model analyzes historical data, weather patterns, and market dynamics to forecast future prices, enabling farmers to strategize their planting schedules and maximize profitability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

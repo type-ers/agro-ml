@@ -1,0 +1,37 @@
+:root {
+    --gap: 2rem;
+}
+
+@media screen and (max-width: 55em) {
+    .headingInfo {
+        margin-inline:1.5rem ;
+    }
+
+    .btnContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+section:nth-child(even) {background-color: whitesmoke;}
+
+.text {
+    padding: 1rem;
+}
+
+.btn,label {
+    padding: 1rem;
+    border: 1px solid var(--clr-dark-secondary);
+    border-radius: 5px;
+    background-color: white;
+    color: var(--clr-dark-secondary);
+    transition: 200ms ease-out;
+}
+
+.btn:hover,
+label:hover {
+    cursor: pointer;
+    background-color: var(--clr-dark-secondary);
+    color: white;
+}

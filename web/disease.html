@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection | Machine Learning for the betterment of mankind</title>
+    <link rel="stylesheet" href="./static/css/disease.css">
+    <link rel="stylesheet" href="./static/css/globalstyles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+    <script src="./static/js/disease.js" defer></script>
+</head>
+
+<body>
+    <section class="fullvh flexCenter flex">
+        <div class="headingInfo">
+            <h1 class="headingSmall center clr-dark-secondary">Disease Detection</h1>
+            <p class="text center clr-dark-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
+                cupiditate sunt nobis veniam, id maxime porro tempore reiciendis earum maiores, repudiandae provident
+                dolores eaque ducimus voluptates illo nihil incidunt perferendis.</p>
+        </div>
+        <div class="btnContainer flex">
+            <a href="#imageDisplay"><button name="btn" class="btn" id="btn">Diaognose Some Diseases!</button></a>
+        </div>
+    </section>
+    <section class="fullvh">
+        <div class="fullvh flexCenter col">
+            <div class="box">
+                <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
+                <select name="dropdown" id="dropdown">
+                    <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
+                    <option value="Select">Select</option> 
+                    <option value="leaf">leaf</option>
+                    <option value="leaf">leaf</option>
+                    <option value="leaf">leaf</option>
+                    <option value="leaf">leaf</option>
+                    <option value="leaf">leaf</option>
+                </select>
+            </div>
+            <div class="box flex col">
+                <img loading="lazy" src="https://placehold.co/500?text=Image goes here" alt="" draggable="false" id="imageDisplay">
+                <input type="file" name="image" id="inputImage" accept="image/png, image/jpg, image/jpeg">
+                <div class="labelDiv flex row">
+                    <label id="label" for="inputImage">Upload File</label>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- This is only shown after the user selects a photo -->
+        <div id="diseaseInfo" class="display center fullvh flexCenter displayNone">
+            <h2 class="subHeading bold">Disease Name</h2>
+            <p>Some info on the disease</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
