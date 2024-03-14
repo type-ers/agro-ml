@@ -1,36 +1,15 @@
-const leaf = document.getElementById("imageDisplay");
-const input = document.getElementById("inputImage");
-const button = document.querySelectorAll("#label");
-const submitButton = document.querySelectorAll("#label")[1];
-const menu = document.getElementById("dropdown");
-const diseaseInfo = document.getElementById("diseaseInfo");
-let dropdownValue;
-
-
-//enabling/disabling the buttons(labels) if leaf-type is/isnt chosen
-document.addEventListener('DOMContentLoaded', () => {
-    button.forEach(btn => {
-        btn.style.pointerEvents = 'none';
-    });
-
-    menu.addEventListener('change', () => {
-        dropdownValue = menu.value;
-        if (dropdownValue === "Select") {
-            button.forEach(btn => {
-                btn.style.pointerEvents = 'none';
-            });
-        }
-        else {
-            button.forEach(btn => {
-                btn.style.pointerEvents = 'all';
-            });
-        }
+document.getElementById('diseaseForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    fetch('/disease', {
+        method: 'POST',
+        body: formData
     })
-})
-
-
-//displays the image given as input by the user & displays the dieaseInfo
-input.addEventListener('change', () => {
-    leaf.src = URL.createObjectURL(input.files[0]);
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('result').innerHTML = "The disease is<br><span>" + data.prediction + "</span>";
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
-
