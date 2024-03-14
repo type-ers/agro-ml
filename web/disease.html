@@ -28,18 +28,18 @@
     </section>
     <section class="fullvh">
         <div class="fullvh flexCenter col">
-            <form action="">
+            <form id="diseaseForm" action="/disease" method="POST" enctype="multipart/form-data">
                 <div class="box">
                     <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
-                        <select name="dropdown" id="dropdown">
-                            <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
-                            <option value="Select">Select</option>
-                            <option value="rice">Rice</option>
-                            <option value="potato">Potato</option>
-                            <option value="corn">Corn</option>
-                            <option value="tomato">Tomato</option>
-                            <option value="apple">Apple</option>
-                        </select>
+                    <select name="dropdown" id="dropdown">
+                        <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
+                        <option value="Select">Select</option>
+                        <option value="rice">Rice</option>
+                        <option value="potato">Potato</option>
+                        <option value="corn">Corn</option>
+                        <option value="tomato">Tomato</option>
+                        <option value="apple">Apple</option>
+                    </select>
                 </div>
                 <div class="box flex col">
                     <img loading="lazy" src="https://placehold.co/500?text=Image goes here" alt="" draggable="false" id="imageDisplay">
@@ -48,9 +48,9 @@
                         <label id="label" for="inputImage">Upload File</label>
                         <input type="submit" value="Submit" class="btn">
                     </div>
-                    <p style="text-align:center;">The disease is<br><span>{DISEASE NAME HERE}</span></p>
+                    <p id="result" style="text-align:center;">Predicted disease: <br><span>{ -- }</span></p>
                 </div>
-            </form>
+            </form>            
         </div>
     </section>
 </body>
