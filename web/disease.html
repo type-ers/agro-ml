@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Disease Detection | Machine Learning for the betterment of mankind</title>
-    <link rel="stylesheet" href="./static/css/disease.css">
-    <link rel="stylesheet" href="./static/css/globalstyles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/disease.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
         rel="stylesheet">
-    <script src="./static/js/disease.js" defer></script>
+    <script src="{{ url_for('static', filename='js/disease.js') }}" defer></script>
 </head>
 
 <body>

@@ -105,3 +105,7 @@ def fetch_account(user_id: int, model):
         image = image,
         bytes = _bytes
     )
+
+def logout():
+    logout_user()
+    return redirect(url_for('login'))

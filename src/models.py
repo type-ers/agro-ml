@@ -20,28 +20,17 @@ def predict_fertilizers(model, required_columns):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-async def predict_disease(leaf_type: str, model, labels):
+def predict_disease(image, model, label):
     try:
-        file = request.args.get('file')
-        url = request.args.get('url').strip('"')
-        if file:            
-            image = Image.open(BytesIO((await file.read())))
-        elif url:
-            response = requests.get(url)
-
-            if response.status_code != 200:
-                return jsonify({"error": "invalid use"})
-            
-            image = Image.open(BytesIO(response.content))
-        else:
-            return jsonify({"error": "invalid use"})
-
-        img_array = img_to_array(image.resize((224,224)))
+        img_array = img_to_array(image.resize((224,2)))
+        
         img_array = np.expand_dims(img_array, axis=0)
         img_array = preprocess_input(img_array)
+
         predictions = model.predict(img_array)
         predicted_label = np.argmax(predictions, axis=1)
-        prediction = (labels[leaf_type])[predicted_label[0]]
+
+        prediction = label[predicted_label[0]]
 
         return jsonify({"prediction": prediction})
     except Exception as e:

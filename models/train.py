@@ -13,9 +13,16 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 from PIL import Image, UnidentifiedImageError 
 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from keras.models import Model
+from keras.optimizers import Adam
+from keras.applications.vgg16 import VGG16, preprocess_input
+from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import ModelCheckpoint, EarlyStopping
+from keras.layers import Dense, Dropout, Flatten
+from pathlib import Path
+from keras.callbacks import ModelCheckpoint
+
+import numpy as np
 
 from joblib import dump
 
@@ -71,66 +78,82 @@ def train_market():
         dump(model, f'market/{commodity}_model.pkl')
 
 def train_disease():
-    data_dir = 'data/disease/'
     disease_labels = {
-        "apple": ["alternaria_leaf_spot", "brown_spot", "frogeye_leaf_spot", "gray_spot", "healthy", "mosaic", "powdery_mildew", "rust", "scab"]
+        "apple": ["brown_spot", "healthy", "mosaic"],   
     }
 
-    input_shape = (255, 255, 3)
-    num_epochs = 10
-    batch_size = 32
-
-    for crop, diseases in disease_labels.items():
-        train_datagen = ImageDataGenerator(
-            rescale=1.0/255.0,
-            validation_split=0.2
-        )
-
-        train_generator = train_datagen.flow_from_directory(
-            data_dir,
-            target_size=(input_shape[0], input_shape[1]),
-            batch_size=batch_size,
-            class_mode='categorical',
-            subset='training',
-            classes=[crop]
-        )
-
-        validation_generator = train_datagen.flow_from_directory(
-            data_dir,
-            target_size=(input_shape[0], input_shape[1]),
-            batch_size=batch_size,
-            class_mode='categorical',
-            subset='validation',
-            classes=[crop]
-        )
-
-        num_classes = len(diseases)
-
-        model = Sequential([
-            Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),
-            MaxPooling2D((2, 2)),
-            Conv2D(64, (3, 3), activation='relu'),
-            MaxPooling2D((2, 2)),
-            Conv2D(128, (3, 3), activation='relu'),
-            MaxPooling2D((2, 2)),
-            Flatten(),
-            Dense(128, activation='relu'),
-            Dense(num_classes, activation='softmax')
-        ])
-
-        model.compile(optimizer='adam',
-                      loss='categorical_crossentropy',
-                      metrics=['accuracy'])
-
-        model.fit(
-            train_generator,
-            steps_per_epoch=train_generator.samples // batch_size,
-            validation_data=validation_generator,
-            validation_steps=validation_generator.samples // batch_size,
-            epochs=num_epochs
-        )
-
-        model.save(f'disease/{crop}.keras')
+    train_generator = ImageDataGenerator(
+        rotation_range=90,
+        width_shift_range=0.5,
+        height_shift_range=0.5,
+        horizontal_flip=True,
+        vertical_flip=True,
+        validation_split=0.15,
+        preprocessing_function=preprocess_input
+    )
+    
+    img_height = 224
+    img_width = 224
+    train_data_dir = 'data/disease/'
+    
+    classes = sorted(os.listdir('test/'))
+    print(classes)
+    
+    train_gen = train_generator.flow_from_directory(
+        train_data_dir,
+        target_size=(img_height, img_width),
+        batch_size = 32,
+        class_mode = 'categorical',
+        shuffle=True,
+        classes = classes,
+    
+    )
+    
+    valid_gen = train_generator.flow_from_directory(
+        train_data_dir,
+        target_size=(img_height, img_width),
+        batch_size=32,
+        class_mode='categorical',
+        shuffle=True,
+        classes=classes,
+    )
+    
+    conv_base = VGG16(
+        include_top=False,
+        weights='imagenet',
+        input_shape=[img_height, img_width] + [3]
+    )
+    
+    for layer in conv_base.layers:
+        layer.trainable = False
+    
+    
+    x = Flatten()(conv_base.output)
+    prediction = Dense(3, activation='softmax')(x)
+    top_model = Model(inputs=conv_base.input, outputs=prediction)
+    top_model.summary()
+    
+    top_model = Model(inputs = conv_base.input, outputs = prediction)
+    top_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+        
+    
+    checkpoint = ModelCheckpoint(
+        filepath='apple2.h5',
+        verbose=2, save_best_only=True, monitor='val_loss'
+    )
+    callbacks = [checkpoint]
+    
+    
+    model_history=top_model.fit_generator(
+        train_gen,
+        validation_data=valid_gen,
+        epochs=10,
+        steps_per_epoch=5,
+        validation_steps=32,
+        callbacks=callbacks,
+        verbose=2
+    )
+    
 
 if __name__ == "__main__":
     train_disease()

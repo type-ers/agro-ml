@@ -35,21 +35,14 @@ def load_user(user_id):
 fetilizer_model = load(fertilizer_model_dir)
 fertilizer_rqcolumns = ['Temperature', 'Humidity', 'Moisture', 'Soil Type', 'Crop Type', 'Nitrogen', 'Potassium', 'Phosphorous']
 
-# disease_model = {
-#     "potato" : load_model(d_model_potato_dir),
-#     "apple" : load_model(d_model_apple_dir),
-#     "rice" : load_model(d_model_rice_dir),
-#     "corn" : load_model(d_model_corn_dir),
-#     "tomato" : load_model(d_model_tomato_dir)
-# }
 
-# disease_labels = {
-#     "potato": ["early blight", "healthy", "late blight"],
-#     "apple": ["scab", "black rot", "cedar apple rust", "healthy"],
-#     "rice": ['leaf blight', 'brown spot', 'healthy', "leaf blast", "leaf scald", 'narrow brown spot'],
-#     "corn": ["blight", "common rust", "healthy"],
-#     "tomato": ["healthy", "late blight", "septoria leaf spot", "yellow leaf curl"]
-# }
+disease_model = {
+    "apple" : load_model(d_model_apple_dir)
+}
+
+disease_label = {
+    "apple": ["brown_spot", "healthy", "mosaic"] 
+}
 
 market_models = {}
 for filename in listdir(market_dir):
@@ -93,6 +86,19 @@ def fertilizer():
 def disease():
     return render_template("disease.html")
 
+@app.route('/disease', methods=['POST'])
+def process_disease_form():
+    leaf_type = request.form.get('dropdown')
+    file = request.files['image']
+
+    try:
+        image = Image.open(BytesIO(file.read()))
+        prediction = predict_disease(image, disease_model[leaf_type], disease_label[leaf_type])
+        
+        return jsonify({"prediction": prediction})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 @__app__.route('/market')
 def market():
     return render_template("market.html")
@@ -114,9 +120,37 @@ def docs():
 def api_fertilizer():
     return predict_fertilizers(fetilizer_model, fertilizer_rqcolumns)
 
-# @__app__.route('/api/disease/<leaf_type>', methods=['GET'])
-# async def api_disease(leaf_type):
-#     return await predict_disease(leaf_type, disease_model[leaf_type], disease_labels)
+@__app__.route('/api/disease/<leaf_type>', methods=['GET'])
+def api_disease(leaf_type):
+    try:
+        file = request.args.get('file')
+        url = request.args.get('url').strip('"')
+
+        if file:
+            image = Image.open(BytesIO(file.read()))
+        elif url:
+            response = requests.get(url)
+            if response.status_code != 200:
+                return jsonify({"error": "Invalid URL or unable to fetch image"})
+            image = Image.open(BytesIO(response.content))
+        else:
+            return jsonify({"error": "No file or URL provided"})
+
+        img_array = img_to_array(image.resize((224,2)))
+        
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array = preprocess_input(img_array)
+
+        predictions = disease_model[leaf_type].predict(img_array)
+        predicted_label = np.argmax(predictions, axis=1)
+
+        prediction = (disease_label[leaf_type])[predicted_label[0]]
+
+        return jsonify({"prediction": prediction})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+        
 
 @__app__.route('/api/market', methods=['GET'])
 def api_market():
