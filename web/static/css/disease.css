@@ -25,7 +25,7 @@ section:nth-child(even) {background-color: whitesmoke;}
     border: 1px solid var(--clr-dark-secondary);
     border-radius: 5px;
     background-color: white;
-    color: var(--clr-dark-secondary);
+    color: var(--primary-bg);
     transition: 200ms ease-out;
 }
 
@@ -68,5 +68,5 @@ img {
 .display {
     width: 100%;
     padding: 1.75rem;
-    background-color: rgb(202, 202, 202);
+    background-color: var(--secondary-bg);
 }

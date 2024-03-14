@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Price Predictor | Machine Learning for the betterment of mankind</title>
+    <link rel="stylesheet" href="./static/css/market.css">
+    <link rel="stylesheet" href="./static/css/globalstyles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+    <script src="./static/js/market.js" defer></script>
+</head>
+<body>
+    <section class="fullvh flexCenter flex">
+        <div class="headingInfo">
+            <h1 class="headingSmall center clr-dark-secondary">Market Price Predictor</h1>
+            <p class="text center clr-dark-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
+                cupiditate sunt nobis veniam, id maxime porro tempore reiciendis earum maiores, repudiandae provident
+                dolores eaque ducimus voluptates illo nihil incidunt perferendis.</p>
+        </div>
+        <div class="btnContainer flex">
+            <a href="#flag"><button name="btn" class="btn" id="btn">Let's Get Started!</button></a>
+        </div>
+    </section>
+    <section class="fullvh" id="flag">
+        <div class="fullvh col flex row" style="justify-content: center;">
+            <div class="box">
+                <form action="" class="flex col">
+                    <p class="bold">Please select a comodity <span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
+                    <select name="Commodity" id="Commodity">
+                        <option value="Tomato Big(Nepali)">Tomato Big(Nepali)</option>
+                        <option value="Tomato Big(Indian)">Tomato Big(Indian)</option>
+                        <option value="Tomato Small(Local)">Tomato Small(Local)</option>
+                        <option value="Tomato Small(Tunnel)">Tomato Small(Tunnel)</option>
+                        <option value="Tomato Small(Indian)">Tomato Small(Indian)</option>
+                        <option value="Tomato Small(Terai)">Tomato Small(Terai)</option>
+                        <option value="Potato Red">Potato Red</option>
+                        <option value="Potato Red(Indian)">Potato Red(Indian)</option>
+                        <option value="Potato White">Potato White</option>
+                        <option value="Onion Dry (Indian)">Onion Dry (Indian)</option>
+                        <option value="Carrot(Local)">Carrot(Local)</option>
+                        <option value="Carrot(Terai)">Carrot(Terai)</option>
+                        <option value="Cabbage(Local)">Cabbage(Local)</option>
+                        <option value="Cabbage(Terai)">Cabbage(Terai)</option>
+                        <option value="Cabbage">Cabbage</option>
+                        <option value="Cauli Local">Cauli Local</option>
+                        <option value="Cauli Local(Jyapu)">Cauli Local(Jyapu)</option>
+                        <option value="Cauli Terai">Cauli Terai</option>
+                        <option value="Raddish Red">Raddish Red</option>
+                        <option value="Raddish White(Local)">Raddish White(Local)</option>
+                        <option value="Raddish White(Hybrid)">Raddish White(Hybrid)</option>
+                        <option value="Brinjal Long">Brinjal Long</option>
+                        <option value="Brinjal Round">Brinjal Round</option>
+                        <option value="Green Peas">Green Peas</option>
+                        <option value="French Bean(Local)">French Bean(Local)</option>
+                        <option value="French Bean(Hybrid)">French Bean(Hybrid)</option>
+                        <option value="Sword Bean">Sword Bean</option>
+                        <option value="Bitter Gourd">Bitter Gourd</option>
+                        <option value="Bottle Gourd">Bottle Gourd</option>
+                        <option value="Pumpkin">Pumpkin</option>
+                        <option value="Squash(Long)">Squash(Long)</option>
+                        <option value="Squash(Round)">Squash(Round)</option>
+                        <option value="Turnip">Turnip</option>
+                        <option value="Okara">Okara</option>
+                        <option value="Sweet Potato">Sweet Potato</option>
+                        <option value="Barela">Barela</option>
+                        <option value="Arum">Arum</option>
+                        <option value="Christophine">Christophine</option>
+                        <option value="Brd Leaf Mustard">Brd Leaf Mustard</option>
+                        <option value="Spinach Leaf">Spinach Leaf</option>
+                        <option value="Cress Leaf">Cress Leaf</option>
+                        <option value="Mustard Leaf">Mustard Leaf</option>
+                        <option value="Fenugreek Leaf">Fenugreek Leaf</option>
+                        <option value="Onion Green">Onion Green</option>
+                        <option value="Bakula">Bakula</option>
+                        <option value="Yam">Yam</option>
+                        <option value="Mushroom(Kanya)">Mushroom(Kanya)</option>
+                        <option value="Mushroom(Button)">Mushroom(Button)</option>
+                        <option value="Brocauli">Brocauli</option>
+                        <option value="Sugarbeet">Sugarbeet</option>
+                        <option value="Red Cabbbage">Red Cabbbage</option>
+                        <option value="Lettuce">Lettuce</option>
+                        <option value="Knolkhol">Knolkhol</option>
+                        <option value="Celery">Celery</option>
+                        <option value="Parseley">Parseley</option>
+                        <option value="Fennel Leaf">Fennel Leaf</option>
+                        <option value="Mint">Mint</option>
+                        <option value="Turnip A">Turnip A</option>
+                        <option value="Tamarind">Tamarind</option>
+                        <option value="Bamboo Shoot">Bamboo Shoot</option>
+                        <option value="Tofu">Tofu</option>
+                        <option value="Gundruk">Gundruk</option>
+                        <option value="Apple(Jholey)">Apple(Jholey)</option>
+                        <option value="Apple(Fuji)">Apple(Fuji)</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Lime">Lime</option>
+                        <option value="Pomegranate">Pomegranate</option>
+                        <option value="Grapes(Green)">Grapes(Green)</option>
+                        <option value="Grapes(Black)">Grapes(Black)</option>
+                        <option value="Orange(Nepali)">Orange(Nepali)</option>
+                        <option value="Orange(Indian)">Orange(Indian)</option>
+                        <option value="Water Melon(Green)">Water Melon(Green)</option>
+                        <option value="Sweet Orange">Sweet Orange</option>
+                        <option value="Pineapple">Pineapple</option>
+                        <option value="Cucumber(Local)">Cucumber(Local)</option>
+                        <option value="Cucumber(Hybrid)">Cucumber(Hybrid)</option>
+                        <option value="Pear(Chinese)">Pear(Chinese)</option>
+                        <option value="Papaya(Indian)">Papaya(Indian)</option>
+                        <option value="Guava">Guava</option>
+                        <option value="Mombin">Mombin</option>
+                        <option value="Kinnow">Kinnow</option>
+                        <option value="Strawberry">Strawberry</option>
+                        <option value="Kiwi">Kiwi</option>
+                        <option value="Ginger">Ginger</option>
+                        <option value="Chilli Dry">Chilli Dry</option>
+                        <option value="Chilli Green">Chilli Green</option>
+                        <option value="Chilli Green(Bullet)">Chilli Green(Bullet)</option>
+                        <option value="Chilli Green(Machhe)">Chilli Green(Machhe)</option>
+                        <option value="Capsicum">Capsicum</option>
+                        <option value="Garlic Green">Garlic Green</option>
+                        <option value="Coriander Green">Coriander Green</option>
+                        <option value="Garlic Dry Chinese">Garlic Dry Chinese</option>
+                        <option value="Fish Fresh(Rahu)">Fish Fresh(Rahu)</option>
+                        <option value="Fish Fresh(Bachuwa)">Fish Fresh(Bachuwa)</option>
+                        <option value="Fish Fresh(Chhadi)">Fish Fresh(Chhadi)</option>
+                        <option value="Fish Fresh(Mungari)">Fish Fresh(Mungari)</option>
+                        <option value="Chilli Green(Akbare)">Chilli Green(Akbare)</option>
+                        <option value="Papaya(Nepali)">Papaya(Nepali)</option>
+                        <option value="Pointed Gourd(Terai)">Pointed Gourd(Terai)</option>
+                        <option value="Jack Fruit">Jack Fruit</option>
+                        <option value="Lemon">Lemon</option>
+                        <option value="Pointed Gourd(Local)">Pointed Gourd(Local)</option>
+                        <option value="Drumstick">Drumstick</option>
+                        <option value="Smooth Gourd">Smooth Gourd</option>
+                        <option value="Garlic Dry Nepali">Garlic Dry Nepali</option>
+                        <option value="Asparagus">Asparagus</option>
+                        <option value="Sugarcane">Sugarcane</option>
+                        <option value="French Bean(Rajma)">French Bean(Rajma)</option>
+                        <option value="Neuro">Neuro</option>
+                        <option value="Clive Green">Clive Green</option>
+                        <option value="Bauhania flower">Bauhania flower</option>
+                        <option value="Cow pea(Long)">Cow pea(Long)</option>
+                        <option value="Sponge Gourd">Sponge Gourd</option>
+                        <option value="Clive Dry">Clive Dry</option>
+                        <option value="Snake Gourd">Snake Gourd</option>
+                        <option value="Mango(Calcutte)">Mango(Calcutte)</option>
+                        <option value="Water Melon(Dotted)">Water Melon(Dotted)</option>
+                        <option value="Mango(Maldah)">Mango(Maldah)</option>
+                        <option value="Cowpea(Short)">Cowpea(Short)</option>
+                        <option value="Soyabean Green">Soyabean Green</option>
+                        <option value="Mango(Chousa)">Mango(Chousa)</option>
+                        <option value="Mango(Dushari)">Mango(Dushari)</option>
+                        <option value="Litchi(Indian)">Litchi(Indian)</option>
+                        <option value="Potato Red(Mude)">Potato Red(Mude)</option>
+                        <option value="Litchi(Local)">Litchi(Local)</option>
+                        <option value="Pear(Local)">Pear(Local)</option>
+                        <option value="Sarifa">Sarifa</option>
+                        <option value="Avocado">Avocado</option>
+                        <option value="Amla">Amla</option>
+                        <option value="Sweet Lime">Sweet Lime</option>
+                        <option value="Mandarin">Mandarin</option>
+                        <option value="Onion Dry (Chinese)">Onion Dry (Chinese)</option>
+                        <option value="Tree Tomato">Tree Tomato</option>
+                      </select>
+                      
+
+                    <label class="bold" for="date">Please select a date
+                        <span title="Required" style="color: rgb(230, 0, 0);">*</span><br>
+                    </label>
+                    <input type="date" name="date" id="date">
+                    
+                    <input type="submit" value="Submit">
+                </form><br>
+                <span class="bold">Expected Price:</span>
+                <span class="expectedPrice" id="expectedPrice">{EXPECTED PRICE HERE}</span>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,6 +1,10 @@
 :root{
-    --clr-green-primary:#00B834;
-    --clr-dark-secondary:#3F3D56;
+
+    --clr-green-primary: #00B834; /* Main green color */
+    --clr-dark-secondary: ;
+
+    --primary-bg:#0D1821 ;
+    --secondary-bg: rgb(65,65,65)/*#1B1725*/;
     
     --pink-flamingo: #a56081;
     --dark-scarlet: #63263f;
@@ -25,6 +29,8 @@
     --media-max-width:55em;
   
   }
+  section:nth-child(odd) {background-color: var(--secondary-bg)}
+  section:nth-child(even) {background-color: var(--primary-bg);}
   
   /* CSS RESETS */
   
@@ -47,7 +53,9 @@
   
   /* Set core root defaults */
   html {
+    background-color: var(--secondary-bg);
     scroll-behavior: smooth;
+    color: #D4D4D4;
   }
   
   /* Set core body defaults */

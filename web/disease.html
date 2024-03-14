@@ -28,35 +28,30 @@
     </section>
     <section class="fullvh">
         <div class="fullvh flexCenter col">
-            <div class="box">
-                <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
-                <select name="dropdown" id="dropdown">
-                    <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
-                    <option value="Select">Select</option> 
-                    <option value="leaf">leaf</option>
-                    <option value="leaf">leaf</option>
-                    <option value="leaf">leaf</option>
-                    <option value="leaf">leaf</option>
-                    <option value="leaf">leaf</option>
-                </select>
-            </div>
-            <div class="box flex col">
-                <img loading="lazy" src="https://placehold.co/500?text=Image goes here" alt="" draggable="false" id="imageDisplay">
-                <input type="file" name="image" id="inputImage" accept="image/png, image/jpg, image/jpeg">
-                <div class="labelDiv flex row">
-                    <label id="label" for="inputImage">Upload File</label>
+            <form action="">
+                <div class="box">
+                    <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
+                        <select name="dropdown" id="dropdown">
+                            <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
+                            <option value="Select">Select</option>
+                            <option value="rice">Rice</option>
+                            <option value="potato">Potato</option>
+                            <option value="corn">Corn</option>
+                            <option value="tomato">Tomato</option>
+                            <option value="apple">Apple</option>
+                        </select>
                 </div>
-
-            </div>
-        </section>
-
-        <!-- This is only shown after the user selects a photo -->
-        <div id="diseaseInfo" class="display center fullvh flexCenter displayNone">
-            <h2 class="subHeading bold">Disease Name</h2>
-            <p>Some info on the disease</p>
+                <div class="box flex col">
+                    <img loading="lazy" src="https://placehold.co/500?text=Image goes here" alt="" draggable="false" id="imageDisplay">
+                    <input type="file" name="image" id="inputImage" accept="image/png, image/jpg, image/jpeg">
+                    <div class="labelDiv flex row">
+                        <label id="label" for="inputImage">Upload File</label>
+                        <input type="submit" value="Submit" class="btn">
+                    </div>
+                    <p style="text-align:center;">The disease is<br><span>{DISEASE NAME HERE}</span></p>
+                </div>
+            </form>
         </div>
-    </div>
-
+    </section>
 </body>
-
 </html>

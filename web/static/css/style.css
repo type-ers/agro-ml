@@ -1,4 +1,6 @@
-section:nth-child(even) {background-color:whitesmoke}
+
+section:nth-child(odd) {background-color: var(--secondary-bg)}
+section:nth-child(even) {background-color: var(--primary-bg);}
 .loginBig {display: none;}
 
 .navbar {
@@ -18,7 +20,7 @@ section:nth-child(even) {background-color:whitesmoke}
     z-index: 100;
     transform: translateX(100%);
     transition: transform 300ms ease-out;
-    background-color: whitesmoke;
+    background-color: var(--secondary-bg);
     border: 2px solid var(--clr-green-primary);
   }
   .mobile-navigation {
@@ -49,7 +51,7 @@ li > a::before {
   height: 2px;
   bottom: 0;
 
-  background-color: var(--clr-dark-secondary);
+  background-color: white;
   border: none;
   border-radius: 5px;
 

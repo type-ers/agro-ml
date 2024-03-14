@@ -1,6 +1,7 @@
 const leaf = document.getElementById("imageDisplay");
 const input = document.getElementById("inputImage");
 const button = document.querySelectorAll("#label");
+const submitButton = document.querySelectorAll("#label")[1];
 const menu = document.getElementById("dropdown");
 const diseaseInfo = document.getElementById("diseaseInfo");
 let dropdownValue;
@@ -31,8 +32,5 @@ document.addEventListener('DOMContentLoaded', () => {
 //displays the image given as input by the user & displays the dieaseInfo
 input.addEventListener('change', () => {
     leaf.src = URL.createObjectURL(input.files[0]);
-    diseaseInfo.classList.toggle("displayNone");
-    leaf.addEventListener('load',() => {
-        window.scrollTo(0,document.body.scrollHeight);
-    })
-})
+});
+
