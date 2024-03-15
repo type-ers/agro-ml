@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.prediction) {
-                document.getElementById('result').innerHTML = "Precicted price: <br><span>" + data.prediction + "</span>";
+                document.getElementById('result').innerHTML = "Disease: <br><span>" + data.prediction + "</span>";
             } else {
                 document.getElementById('result').innerHTML = "Error: Unable to get fertilizer recommendation.";
             }

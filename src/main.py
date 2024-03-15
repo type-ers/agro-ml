@@ -108,11 +108,6 @@ def process_market_form():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-# playground
-@__app__.route('/playground')
-def playground():   
-    return render_template("playground.html")
-
 # docs
 
 @__app__.route('/docs')
