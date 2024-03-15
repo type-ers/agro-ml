@@ -1,5 +1,4 @@
-from models import *
-from auth import *
+from config import *
 
 __app__ = Flask(__name__, template_folder=abspath('web/'), static_folder=abspath('web/static'))
 
@@ -8,16 +7,8 @@ __app__ = Flask(__name__, template_folder=abspath('web/'), static_folder=abspath
 fetilizer_model = load(fertilizer_model_dir)
 fertilizer_rqcolumns = ['Temperature', 'Humidity', 'Moisture', 'Soil Type', 'Crop Type', 'Nitrogen', 'Potassium', 'Phosphorous']
 
-nominal_transformer = Pipeline(steps=[
-    ('onehot', OneHotEncoder())
-])
-
-fertilizer_preprocessor = ColumnTransformer(transformers=[
-    ('nominal', nominal_transformer, ['Soil Type', 'Crop Type'])
-], remainder='passthrough')
-
 disease_model = {
-    "apple" : load_model(d_model_apple_dir)
+    "apple" : load_model(d_model_apple_dir),
     "potato" : load_model(d_model_potato_dir),
     "tomato": load_model(d_model_tomato_dir),
     "rice": load_model(d_model_rice_dir),
@@ -84,7 +75,15 @@ def process_disease_form():
     file = request.files['image']
     try:
         image = Image.open(file)
-        prediction = predict_disease(image, disease_model[leaf_type], disease_label[leaf_type])
+        img_array = img_to_array(image.resize((224,224)))
+        
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array = preprocess_input(img_array)
+
+        predictions = (disease_model[leaf_type]).predict(img_array)
+        predicted_label = np.argmax(predictions, axis=1)
+
+        prediction = (disease_label[leaf_type])[predicted_label[0]]
         
         return jsonify({"prediction": prediction})
     except Exception as e:
@@ -94,10 +93,20 @@ def process_disease_form():
 def market():
     return render_template("market.html")
 
-@__app__.rooute('/market', methods=['POST'])
+@__app__.route('/market', methods=['POST'])
 def process_market_form():
-    pass
-    
+    commodity = request.form.get('commodity')
+    date = request.form.get('date')
+
+    print(f"{commodity} for {date}")
+    try:
+        date_ordinal = pd.to_datetime(date).toordinal()
+        print(market_models[commodity])
+        prediction = (market_models[commodity]).predict([[date_ordinal]])
+
+        return jsonify({"prediction": float(prediction)})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 # playground
 @__app__.route('/playground')
@@ -171,17 +180,20 @@ def api_market():
     commodity = request.args.get('commodity')
 
     if commodity in market_models:
-        return predict_market(market_models[commodity])
-    else:
-        return jsonify({"error": f"Model for commodity '{commodity}' not found"}), 404
+        try:
+            date = request.args.get('date')
+            date_ordinal = pd.to_datetime(date).toordinal()
+        
+            prediction = (market_models[commodity]).predict([[date_ordinal]])
+
+            return jsonify({"prediction": float(prediction)})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 400
 
 
 @__app__.errorhandler(404)
 def page_not_found(error):
     return render_template('errors/404.html'), 404
-
-with __app__.app_context():
-    db.create_all() 
 
 if __name__ == '__main__':
     __app__.run(debug=True, port=8888)

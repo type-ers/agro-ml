@@ -3,35 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+
     <title>AgroML | The future of agriculture</title>
-    
-    <link rel="stylesheet" href="./static/css/style.css">
-    <link rel="stylesheet" href="./static/css/globalstyles.css">    
+  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">    
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 
-    <script src="./static/js/main.js" defer></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
   </head>
   <body>
     <section class="fullvh">
-    <header>
-      <button class="mobile-navigation hide" aria-expanded="false" style="background-color: var(--secondary-bg);"></button>
+      <header>
+        <button class="mobile-navigation hide" aria-expanded="false" style="background-color: var(--secondary-bg);"></button>
         <nav>
-          <ul data-visible="false" class="navbar flex" id="navbar">
-                <li class="loginBig"><a href="./login.html" target="_blank">Login</a></li>
-                <li class="login"><a href="" target="_blank"><div class="login"></div></a></li>
-                <li><a href="#home" id="home">Home</a></li>
-                <li><a href="#">Docs</a></li>
-                <li><a href="/disease" target="_blank">Disease Detection</a></li>
-                <li><a href="/fertilizer" target="_blank">Fertilizer Manager</a></li>
-                <li><a href="/market" target="_blank">Market Predictor</a></li>
-              </ul>
+            <ul data-visible="false" class="navbar flex" id="navbar">
+                    <li><a href="/" id="home">Home</a></li>
+                    <li><a href="/disease" target="_blank">Disease Detection</a></li>
+                    <li><a href="/fertilizer" target="_blank">Fertilizer Manager</a></li>
+                    <li><a href="/market" target="_blank">Market Predictor</a></li>
+                </ul>
         </nav>
-    </header>
+      </header>
       <div class="container">
         <div class="mainImage"><img src="{{ url_for('static', filename='images/main.svg') }}" draggable="false" alt="" ></div>
         <div class="homeText clr-dark-secondary">

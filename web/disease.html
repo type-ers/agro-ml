@@ -1,11 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Disease Detection | Machine Learning for the betterment of mankind</title>
+   
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <title>Plant Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/disease.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
     <link
@@ -14,17 +18,17 @@
     <script src="{{ url_for('static', filename='js/disease.js') }}" defer></script>
 </head>
 <body>
-    <section class="fullvh flexCenter flex">
-        <div class="headingInfo">
-            <h1 class="headingSmall center clr-dark-secondary">Disease Detection</h1>
-            <p class="text center clr-dark-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
-                cupiditate sunt nobis veniam, id maxime porro tempore reiciendis earum maiores, repudiandae provident
-                dolores eaque ducimus voluptates illo nihil incidunt perferendis.</p>
-        </div>
-        <div class="btnContainer flex">
-            <a href="#imageDisplay"><button name="btn" class="btn" id="btn">Diaognose Some Diseases!</button></a>
-        </div>
-    </section>
+    <header>
+        <button class="mobile-navigation hide" aria-expanded="false" style="background-color: var(--secondary-bg);"></button>
+        <nav>
+            <ul data-visible="false" class="navbar flex" id="navbar">
+                    <li><a href="/" id="home">Home</a></li>
+                    <li><a href="/disease" target="_blank">Disease Detection</a></li>
+                    <li><a href="/fertilizer" target="_blank">Fertilizer Manager</a></li>
+                    <li><a href="/market" target="_blank">Market Predictor</a></li>
+                </ul>
+        </nav>
+    </header>
     <section class="fullvh">
         <div class="fullvh flexCenter col">
             <form id="diseaseForm" action="/disease" method="POST" enctype="multipart/form-data">
@@ -40,7 +44,6 @@
                     </select>
                 </div>
                 <div class="box flex col">
-                    <img loading="lazy" src="https://placehold.co/500?text=Image goes here" alt="" draggable="false" id="imageDisplay">
                     <input type="file" name="image" accept="image/png, image/jpg, image/jpeg">
                     <div class="labelDiv flex row">
                         <label id="label" for="inputImage">Upload File</label>

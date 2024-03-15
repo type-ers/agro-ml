@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Price Predictor | Machine Learning for the betterment of mankind</title>
-    <link rel="stylesheet" href="./static/css/market.css">
-    <link rel="stylesheet" href="./static/css/globalstyles.css">
+    
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <title>Market Price Predictor </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/market.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
         rel="stylesheet">
-    <script src="./static/js/market.js" defer></script>
+    <script src="{{ url_for('static', filename='js/disease.js') }}" defer></script>
 </head>
 <body>
-    <section class="fullvh flexCenter flex">
-        <div class="headingInfo">
-            <h1 class="headingSmall center clr-dark-secondary">Market Price Predictor</h1>
-            <p class="text center clr-dark-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
-                cupiditate sunt nobis veniam, id maxime porro tempore reiciendis earum maiores, repudiandae provident
-                dolores eaque ducimus voluptates illo nihil incidunt perferendis.</p>
-        </div>
-        <div class="btnContainer flex">
-            <a href="#flag"><button name="btn" class="btn" id="btn">Let's Get Started!</button></a>
-        </div>
-    </section>
+    <header>
+        <button class="mobile-navigation hide" aria-expanded="false" style="background-color: var(--secondary-bg);"></button>
+        <nav>
+            <ul data-visible="false" class="navbar flex" id="navbar">
+                    <li><a href="/" id="home">Home</a></li>
+                    <li><a href="/disease" target="_blank">Disease Detection</a></li>
+                    <li><a href="/fertilizer" target="_blank">Fertilizer Manager</a></li>
+                    <li><a href="/market" target="_blank">Market Predictor</a></li>
+                </ul>
+        </nav>
+    </header>
     <section class="fullvh" id="flag">
         <div class="fullvh col flex row" style="justify-content: center;">
             <div class="box">
-                <form action="" class="flex col">
+                <form id="markektForm" action="/market" method="POST" enctype="multipart/form-data" class="flex col">
                     <p class="bold">Please select a comodity <span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
-                    <select name="Commodity" id="Commodity">
+                    
+                    <select name="commodity" id="commodity">
                         <option value="Tomato Big(Nepali)">Tomato Big(Nepali)</option>
                         <option value="Tomato Big(Indian)">Tomato Big(Indian)</option>
                         <option value="Tomato Small(Local)">Tomato Small(Local)</option>
@@ -163,7 +168,7 @@
                         <option value="Mandarin">Mandarin</option>
                         <option value="Onion Dry (Chinese)">Onion Dry (Chinese)</option>
                         <option value="Tree Tomato">Tree Tomato</option>
-                      </select>
+                    </select>
                       
 
                     <label class="bold" for="date">Please select a date
@@ -173,8 +178,7 @@
                     
                     <input type="submit" value="Submit">
                 </form><br>
-                <span class="bold">Expected Price:</span>
-                <span class="expectedPrice" id="expectedPrice">{EXPECTED PRICE HERE}</span>
+                <p id="result" style="text-align:center;">Precicted price: <br><span>{ -- }</span></p>
             </div>
         </div>
     </section>

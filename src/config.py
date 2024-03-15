@@ -28,10 +28,10 @@ from sklearn.preprocessing import OneHotEncoder
 
 fertilizer_model_dir = "models/fertilizer.pkl"
 
-d_model_potato_dir = "models/disease/.h5"
+d_model_potato_dir = "models/disease/potato.h5"
 d_model_apple_dir = "models/disease/apple.h5"
-d_model_rice_dir = "models/d_rice.h5"
-d_model_corn_dir = "models/d_corn.h5"
-d_model_tomato_dir = "models/d_tomato.h5"
+d_model_rice_dir = "models/disease/rice.h5"
+d_model_corn_dir = "models/disease/corn.h5"
+d_model_tomato_dir = "models/disease/tomato.h5"
 
 market_dir = 'models/market'
