@@ -52,9 +52,29 @@
 
 We welcome contributions from the community! If you'd like to contribute to Agro-ml, please fork the repository and submit a pull request.
 
+```
+git clone https://github.com/ItsSitanshu/agro-ml.git
+
+// train
+cd models/ && python3 train.py
+
+// flask-app
+python3 src/main.py
+```
+
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 For any inquiries or feedback, please contact us:
 - Email: [sitanshu15shrestha@gmail.com](mailto:sitanshu15shrestha@gmail.com)
 - GitHub Issues: [Agro-ml Issues](https://github.com/ItsSitanshu/agro-ml/issues)
+
+<h3>Data Sets</h3>
+[models/data/fertilizer.csv](https://www.kaggle.com/datasets/gdabhishek/fertilizer-prediction)
+[models/data/disease/*]
+- [corn](https://www.kaggle.com/datasets/smaranjitghose/corn-or-maize-leaf-disease-dataset/data)
+- [apple](https://www.kaggle.com/datasets/mhantor/apple-leaf-diseases/data)
+- [tomato](https://www.kaggle.com/datasets/kaustubhb999/tomatoleaf)
+- [rice](https://www.kaggle.com/datasets/dedeikhsandwisaputra/rice-leafs-disease-dataset?resource=download)
+- [potato](https://www.kaggle.com/datasets/muhammadardiputra/potato-leaf-disease-dataset)
+[models/data/market.csv](https://opendatanepal.com/dataset/activity/kalimati-tarkari-dataset)
