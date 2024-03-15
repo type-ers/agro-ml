@@ -2,46 +2,34 @@ from models import *
 from auth import *
 
 __app__ = Flask(__name__, template_folder=abspath('web/'), static_folder=abspath('web/static'))
-__app__.config['SECRET_KEY'] = "randomhashhere"
-
-# database
-
-__app__.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + abspath('db/meta.db')
-__app__.config['SQLALCHEMY_BINDS'] = {"auth": {"url": "sqlite:///" + abspath('db/auth.db')}}
-
-db = SQLAlchemy(__app__)
 
 # authentication
-
-class User(db.Model):
-    __bind_key__ = "auth"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(26), unique=True, nullable=False)
-    email = db.Column(db.String(254), unique=True, nullable=False)
-    password = db.Column(db.String(72), nullable=False)
-    image = db.Column(LargeBinary)
-
-bcrypt = Bcrypt()
-
-login_manager = LoginManager()
-login_manager.init_app(__app__)
-login_manager.login_view = "login"
-
-@login_manager.user_loader
-def load_user(user_id):
-    return redirect(url_for(f'user/{user_id}'))
-
 
 fetilizer_model = load(fertilizer_model_dir)
 fertilizer_rqcolumns = ['Temperature', 'Humidity', 'Moisture', 'Soil Type', 'Crop Type', 'Nitrogen', 'Potassium', 'Phosphorous']
 
+nominal_transformer = Pipeline(steps=[
+    ('onehot', OneHotEncoder())
+])
+
+fertilizer_preprocessor = ColumnTransformer(transformers=[
+    ('nominal', nominal_transformer, ['Soil Type', 'Crop Type'])
+], remainder='passthrough')
 
 disease_model = {
     "apple" : load_model(d_model_apple_dir)
+    "potato" : load_model(d_model_potato_dir),
+    "tomato": load_model(d_model_tomato_dir),
+    "rice": load_model(d_model_rice_dir),
+    "corn": load_model(d_model_corn_dir)
 }
 
 disease_label = {
-    "apple": ["brown_spot", "healthy", "mosaic"] 
+    "apple": ["brown_spot", "healthy", "mosaic"],
+    "potato": ["fungi",  "healthy", "nematode"],
+    "rice": ['leaf blight', 'brown spot', 'healthy', "leaf blast", "leaf scald", 'narrow brown spot'],
+    "corn": ["blight", "common rust", "healthy"],
+    "tomato": ["healthy", "late blight", "septoria leaf spot", "yellow leaf curl"]
 }
 
 market_models = {}
@@ -55,44 +43,47 @@ for filename in listdir(market_dir):
         except Exception as e:
             print(f"Error loading model '{filename}': {str(e)}")
 
-
 # home
 
 @__app__.route('/')
 def home():
     return render_template("index.html")
 
-# authentication
-
-@__app__.route('/login', methods=["GET", "POST"])
-def login():
-    return session_login(bcrypt, db, User)
-
-@__app__.route('/register', methods=["GET", "POST"])
-def signup():
-    return register_account(bcrypt, db, User)
-
-@__app__.route('/user/<user_id>')
-def profile(user_id):
-    return fetch_account(int(user_id), User)
-
-# info
-
 @__app__.route('/fertilizer')
 def fertilizer():
     return render_template("fertilizer.html")
+
+@__app__.route('/fertilizer', methods=['POST'])
+def process_fertilizer_form():
+    try:
+        temperature = request.form.get('temperature')
+        humidity = request.form.get('humidity')
+        moisture = request.form.get('moisture')
+        soil_type = request.form.get('soil_type')
+        crop_type = request.form.get('crop_type')
+        nitrogen = request.form.get('nitrogen')
+        potassium = request.form.get('potassium')
+        phosphorous = request.form.get('phosphorous')
+
+        input_data = pd.DataFrame([[temperature, humidity, moisture, soil_type, crop_type, nitrogen, potassium, phosphorous]],
+                                columns=fertilizer_rqcolumns)
+
+        prediction = fetilizer_model.predict(input_data)
+
+        return jsonify({"prediction": prediction[0]})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 @__app__.route('/disease')
 def disease():
     return render_template("disease.html")
 
-@app.route('/disease', methods=['POST'])
+@__app__.route('/disease', methods=['POST'])
 def process_disease_form():
     leaf_type = request.form.get('dropdown')
     file = request.files['image']
-
     try:
-        image = Image.open(BytesIO(file.read()))
+        image = Image.open(file)
         prediction = predict_disease(image, disease_model[leaf_type], disease_label[leaf_type])
         
         return jsonify({"prediction": prediction})
@@ -102,6 +93,11 @@ def process_disease_form():
 @__app__.route('/market')
 def market():
     return render_template("market.html")
+
+@__app__.rooute('/market', methods=['POST'])
+def process_market_form():
+    pass
+    
 
 # playground
 @__app__.route('/playground')
@@ -118,7 +114,25 @@ def docs():
 
 @__app__.route('/api/fertilizer', methods=['GET'])
 def api_fertilizer():
-    return predict_fertilizers(fetilizer_model, fertilizer_rqcolumns)
+    try:
+        temperature = float(request.args.get('temperature'))
+        humidity = float(request.args.get('humidity'))
+        moisture = float(request.args.get('moisture'))
+        soil_type = request.args.get('soil_type')
+        crop_type = request.args.get('crop_type')
+        nitrogen = float(request.args.get('nitrogen'))
+        potassium = float(request.args.get('potassium'))
+        phosphorous = float(request.args.get('phosphorous'))
+
+        input_data = pd.DataFrame([[temperature, humidity, moisture, soil_type, crop_type, nitrogen, potassium, phosphorous]],
+                                  columns=['Temperature', 'Humidity', 'Moisture', 'Soil Type', 'Crop Type', 'Nitrogen', 'Potassium', 'Phosphorous'])
+
+        prediction = fetilizer_model.predict(input_data)
+
+        return jsonify({"prediction": prediction[0]})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 
 @__app__.route('/api/disease/<leaf_type>', methods=['GET'])
 def api_disease(leaf_type):

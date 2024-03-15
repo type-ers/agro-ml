@@ -14,15 +14,16 @@ def predict_fertilizers(model, required_columns):
         input_data = pd.DataFrame([[temperature, humidity, moisture, soil_type, crop_type, nitrogen, potassium, phosphorous]],
                                   columns=required_columns)
 
+
         prediction = model.predict(input_data)
 
-        return jsonify({"prediction": prediction[0]})
+        return prediction
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return str(e), 400
 
 def predict_disease(image, model, label):
     try:
-        img_array = img_to_array(image.resize((224,2)))
+        img_array = img_to_array(image.resize((224,224)))
         
         img_array = np.expand_dims(img_array, axis=0)
         img_array = preprocess_input(img_array)
@@ -32,9 +33,9 @@ def predict_disease(image, model, label):
 
         prediction = label[predicted_label[0]]
 
-        return jsonify({"prediction": prediction})
+        return prediction
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return str(e), 400
 
 def predict_market(model):
     try:

@@ -13,7 +13,6 @@
         rel="stylesheet">
     <script src="{{ url_for('static', filename='js/disease.js') }}" defer></script>
 </head>
-
 <body>
     <section class="fullvh flexCenter flex">
         <div class="headingInfo">
@@ -33,7 +32,6 @@
                     <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
                     <select name="dropdown" id="dropdown">
                         <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
-                        <option value="Select">Select</option>
                         <option value="rice">Rice</option>
                         <option value="potato">Potato</option>
                         <option value="corn">Corn</option>
@@ -43,7 +41,7 @@
                 </div>
                 <div class="box flex col">
                     <img loading="lazy" src="https://placehold.co/500?text=Image goes here" alt="" draggable="false" id="imageDisplay">
-                    <input type="file" name="image" id="inputImage" accept="image/png, image/jpg, image/jpeg">
+                    <input type="file" name="image" accept="image/png, image/jpg, image/jpeg">
                     <div class="labelDiv flex row">
                         <label id="label" for="inputImage">Upload File</label>
                         <input type="submit" value="Submit" class="btn">

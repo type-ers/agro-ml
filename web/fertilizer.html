@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fertilizer Manager</title>
-    <link rel="stylesheet" href="./static/css/globalstyles.css">
-    <link rel="stylesheet" href="./static/css/fertilizer.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fertilizer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <script src="./fertilizer.js"></script>
+    <script src="{{ url_for('static', filename='js/fertilizer.js') }}"></script>
 </head>
 <body>
     <section class="fullvh flexCenter flex">
@@ -25,7 +25,7 @@
     <section class="fullvh" id="flag">
         <div class="fullvh col flex row" style="justify-content: center;">
             <div class="box">
-                <form action="" class="flex col">
+                <form id="fertilizerForm" action="/fertilizer" method="POST" enctype="multipart/form-data" class="flex col">
                     <p class="bold">Temperature <span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
                     <input type="text" placeholder="Temperature" name="temperature"><br>
                     
@@ -46,32 +46,31 @@
                     
                     <p class="bold">Soil Type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
                     <select name="soil_type" id="soil">
-                        <option value="black">Black</option>
-                        <option value="sandy">Sandy</option>
-                        <option value="clayey">Clayey</option>
-                        <option value="red">Red</option>
-                        <option value="loamy">Loamy</option>
+                        <option value="Black">Black</option>
+                        <option value="Sandy">Sandy</option>
+                        <option value="Clayey">Clayey</option>
+                        <option value="Red">Red</option>
+                        <option value="Loamy">Loamy</option>
                     </select><br>
 
                     <p class="bold">Crop Type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
                     <select name="crop_type" id="crop">
-                        <option value="oil seeds">Oil Seeds</option>
-                        <option value="ground nuts">Ground Nuts</option>
-                        <option value="pulses">Pulses</option>
-                        <option value="millets">Millets</option>
-                        <option value="barlet">Barley</option>
-                        <option value="sugarcane">Sugarcane</option>
-                        <option value="maize">Maize</option>
-                        <option value="cotton">Cotton</option>
-                        <option value="tobacco">Tobacco</option>
-                        <option value="paddy">Paddy</option>
-                        <option value="wheat">Wheat</option>
+                        <option value="Oil seeds">Oil Seeds</option>
+                        <option value="Ground nuts">Ground Nuts</option>
+                        <option value="Pulses">Pulses</option>
+                        <option value="Millets">Millets</option>
+                        <option value="Barley">Barley</option>
+                        <option value="Sugarcane">Sugarcane</option>
+                        <option value="Maize">Maize</option>
+                        <option value="Cotton">Cotton</option>
+                        <option value="Tobacco">Tobacco</option>
+                        <option value="Paddy">Paddy</option>
+                        <option value="Wheat">Wheat</option>
                     </select>
 
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit" class="btn">
                 </form><br>
-                <span class="bold">Suggested Fertilizer: </span>
-                <span class="expectedPrice" id="expectedPrice">{EXPECTED FERTILIZER HERE}</span>
+                <p id="result" style="text-align:center;">Suggested Fertilizer: <br><span>{ -- }</span></p>
             </div>
         </div>
     </section>

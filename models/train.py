@@ -156,9 +156,9 @@ def train_disease():
     
 
 if __name__ == "__main__":
-    train_disease()
-    print("DISEASE MODEL = DONE")
+    # train_disease()
+    # print("DISEASE MODEL = DONE")
     train_fertilizer()
     print("FERTILIZER MODEL = DONE")
-    train_market()
-    print("MARKET MODEL = DONE")
+    # train_market()
+    # print("MARKET MODEL = DONE")
