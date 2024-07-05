@@ -9,18 +9,10 @@ fertilizer_rqcolumns = ['Temperature', 'Humidity', 'Moisture', 'Soil Type', 'Cro
 
 disease_model = {
     "apple" : load_model(d_model_apple_dir),
-    "potato" : load_model(d_model_potato_dir),
-    "tomato": load_model(d_model_tomato_dir),
-    "rice": load_model(d_model_rice_dir),
-    "corn": load_model(d_model_corn_dir)
 }
 
 disease_label = {
-    "apple": ["brown_spot", "healthy", "mosaic"],
-    "potato": ["fungi",  "healthy", "nematode"],
-    "rice": ['leaf blight', 'brown spot', 'healthy', "leaf blast", "leaf scald", 'narrow brown spot'],
-    "corn": ["blight", "common rust", "healthy"],
-    "tomato": ["healthy", "late blight", "septoria leaf spot", "yellow leaf curl"]
+    "apple": ["brown_spot", "healthy", "mosaic"]
 }
 
 market_models = {}
