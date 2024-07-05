@@ -7,10 +7,9 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
 
 
-    <title>AgroML | The future of agriculture</title>
+    <title>Agro-ML</title>
   
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,51 +19,250 @@
     <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
   </head>
   <body>
-    <section class="fullvh">
-      <header>
-        <button class="mobile-navigation hide" aria-expanded="false" style="background-color: var(--secondary-bg);"></button>
-        <nav>
-            <ul data-visible="false" class="navbar flex" id="navbar">
-                    <li><a href="/" id="home">Home</a></li>
-                    <li><a href="/disease" target="_blank">Disease Detection</a></li>
-                    <li><a href="/fertilizer" target="_blank">Fertilizer Manager</a></li>
-                    <li><a href="/market" target="_blank">Market Predictor</a></li>
-                </ul>
-        </nav>
-      </header>
-      <div class="container">
-        <div class="mainImage"><img src="{{ url_for('static', filename='images/main.svg') }}" draggable="false" alt="" ></div>
-        <div class="homeText clr-dark-secondary">
-          <h1 class="heading">Agro<span class="clr-green-primary bold">ML</span></h1>
-          <p>Your one-stop solution for precision agriculture. Our cutting-edge machine learning model revolutionizes farming practices by offering three key functionalities. With AgroML, farmers can optimize crop health, enhance fertilizer efficiency, and make informed decisions to maximize their yields. </p>
+  <div class="wrapper">
+    <a href="/"><div class="header">
+      <h1>Agro-<span>ML</span></h1>
+    </div></a>
+    <div class="hero">
+      <p>
+        As a part of the Code for Nepal Hackathon 2024, <a href="https://github.com/type-ers">Type-ers</a>, our team designed and developed a diagnostic tool library for farmers specially in resource-constrained regions.  
+      </p>
+      <img src="{{ url_for('static', filename='images/event.jpeg') }}"/>
+      <h2>TL;DR</h2>
+      <ul>
+        <li>Farmers in remote regions require technical knowledge.</li>
+        <li>Traditional farming practices are still prevalent.</li>
+        <li>Agricultural productivity can be enhanced using diagnostic tools.</li>
+        <li>There is significant potential for IoT in agriculture.</li>
+        <li>Read below for the free live /api/&#60;endpoints&#x3e;</li>
+      </ul>
+      
+      <h2 id="#intro">1. Introduction</h2>
+      <p>
+        Agriculture in resource-constrained regions faces significant challenges due to the lack of affordable and accessible diagnostic tools.
+        The lack of inability to recognize, prevent and act according to different crop diseases, the lack of economical knowladge to sell produce at efficient rates, and the lack of agricultural knowladge were the three major problems we managed to identify.
+      </p>
+      <p>
+        We came up with the perfect solution to such problems. AI and ML accelerated diagnostic tools: disease detection, market price predictor, and fertilizer composer.
+      </p>
+      <h2 id="#disease">2. Disease Detection</h2>
+        <p>
+          Our approach leverages state-of-the-art deep learning techniques to facilitate accurate and efficient disease detection in plants through image analysis. Specifically, we have implemented a convolutional neural network (CNN) model, fine-tuned for each plant type, using the VGG16 architecture.
+        </p>
+
+        <p>
+            We utilized transfer learning by fine-tuning the VGG16 CNN, a well-known model pre-trained on the ImageNet dataset. The fine-tuning process involves adjusting the parameters of pre-trained layers to adapt them to our specific task. This is achieved by unfreezing some or all of the layers in the pre-trained model and retraining it with our dataset of leaf images. This approach allows us to leverage the learned features from the large and diverse ImageNet dataset while specializing the model for the targeted plant diseases.
+        </p>
+        <img src="{{ url_for('static', filename='images/vgg16.jpg') }}"/>
+
+        <p>
+            Our trained models can detect the following diseases across different plant species:
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Plant</th>
+                    <th>Diseases</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apple</td>
+                    <td>Brown Spot, Mosaic</td>
+                </tr>
+                <tr>
+                    <td>Tomato</td>
+                    <td>Late Blight, Septoria Leaf Spot, Yellow Leaf Curl</td>
+                </tr>
+                <tr>
+                    <td>Rice</td>
+                    <td>Leaf Blight, Brown Spot, Leaf Blast, Leaf Scald, Narrow Brown Spot</td>
+                </tr>
+                <tr>
+                    <td>Potato</td>
+                    <td>Fungi, Nematode</td>
+                </tr>
+                <tr>
+                    <td>Corn</td>
+                    <td>Blight, Common Rust</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            For each plant type, we curated a comprehensive dataset comprising images of healthy leaves and those affected by specific diseases. These images were then preprocessed, which included resizing, normalization, and augmentation to enhance model generalization. The fine-tuned VGG16 model was trained on these preprocessed images, employing a combination of standard optimization techniques such as stochastic gradient descent (SGD) with momentum, learning rate decay, and early stopping to prevent overfitting.
+        </p>
+
+        <p>
+            The resulting model can process an input image of a leaf and generate a prediction for its state, outputting whether the leaf is "healthy" or identifying a specific disease it has been trained to recognize. This high level of accuracy in detection is achieved through the model's ability to discern intricate patterns and anomalies in the leaf's texture, color, and morphology that are indicative of various diseases.
+        </p>
+
+        <p>
+            This system offers a robust solution for early detection and diagnosis, enabling timely intervention and management of plant diseases, thereby supporting agricultural productivity and sustainability.
+        </p>
+
+        <div class="code-container">
+          <pre class="code-box" id="codeBox">
+            <span>
+            LIVE DEMO IS AVAILABLE <a href="/disease">[HERE]</a> 
+            </span>
+          </pre>
         </div>
-      </div>
-    </section>
-    <section class="fullvh">
-      <div class="aboutContainer flex">
-        <h1 class="headingSmall clr-dark-secondary center" id="about">What we provide?</h1>
-        <div class="about">
-          <img src="{{ url_for('static', filename='images/disease.svg') }}" draggable="false" alt="">
-          <div class="aboutText">
-            <h2 class="clr-green-primary subHeading">Disease Detection</h2>
-            <p>At AgroML, we leverage advanced machine learning algorithms to detect and diagnose crop diseases with unparalleled accuracy. Our model analyzes plant images and identifies subtle signs of infections, enabling early intervention and targeted treatment.</p>
-          </div>
+
+      <h2 id="#market">3. Market Prediction</h2>
+        <p>
+          The Market Trend Analyzer is a tool designed to analyze and predict market trends for a specific commodity based on historical data. It focuses on providing insights into price fluctuations and seasonal patterns to help users make informed decisions regarding the commodity.
+        </p>
+        
+        <p>
+            The dataset used for analysis contains the following information:
+        </p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Season</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2021-01-01</td>
+                    <td>Winter</td>
+                    <td>50.00</td>
+                </tr>
+                <tr>
+                    <td>2021-02-01</td>
+                    <td>Winter</td>
+                    <td>52.20</td>
+                </tr>
+                <tr>
+                    <td>2021-03-01</td>
+                    <td>Spring</td>
+                    <td>49.80</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+              </tr>
+            </tbody>
+        </table>
+        
+        <p>
+            The Market Trend Analyzer utilizes a Random Forest Regressor model to predict market trends based on historical data.
+            Historical market data for the specified commodity is collected from reliable sources.
+            The collected data undergoes cleaning and formatting to ensure consistency and accuracy. This step includes handling missing values, correcting data types, and normalizing price values if necessary.
+        </p>
+        
+        <p>
+            Additional features are derived from the date column to capture seasonal variations in market trends. For instance, creating seasonal indicators (e.g., Winter, Spring) and encoding them as numerical features.
+        </p>
+        
+        <p>
+            A Random Forest Regressor model is trained using the preprocessed data. The input features include the date and seasonal indicators, while the target variable is the commodity price. The training process involves:
+        </p>
+        <ul>
+            <li>Splitting the dataset into training and validation sets.</li>
+            <li>Hyperparameter tuning to optimize the model's performance.</li>
+            <li>Training the model using the training set and evaluating its performance on the validation set.</li>
+        </ul>
+        
+        <p>
+            Given a specific date, the trained model predicts the market price of the commodity for that date. This prediction provides insights into the market trend, allowing users to make informed decisions.
+        </p>
+        
+        <div class="code-container">
+          <button class="copy-btn" onclick="copyCode()"><img src="{{ url_for('static', filename='images/copy.svg') }}"/></button>
+          <pre class="code-box" id="codeBox">
+            <span>
+            /api/market?commodity=Tomato Big(Nepali)&date=2022-01-01
+            </span>
+          </pre>
         </div>
-        <div class="about">
-          <img src="{{ url_for('static', filename='images/fertilizer.svg') }}" draggable="false" alt="">
-          <div class="aboutText">
-            <h2 class="clr-green-primary subHeading">Fertilizer Management</h2>
-            <p>AgroML empowers farmers with precise fertilizer management solutions tailored to their specific soil conditions and crop requirements. By inputting soil data and other relevant parameters, our model recommends the optimal type of fertilizers and their respective proportions, ensuring efficient nutrient uptake and healthy crop growth.</p>
-          </div>
+      <h2 id="#fertilizer">4. Fertilizer Composer</h2>        
+        <p>
+            The Fertilizer Composer ingests temperature, humidity, moisture, soil type, and crop type as input features and predicts the type of fertilizer to be utilized. The possible outputs include Urea, DAP, or NPK, with specified ratios of Nitrogen (N), Phosphorus (P), and Potassium (K).
+        </p>
+        
+        <p>
+            The input parameters and their respective possible values are enumerated below:
+        </p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Data Type</th>
+                    <th>Values</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Temperature</td>
+                    <td>float</td>
+                    <td>any</td>
+                </tr>
+                <tr>
+                    <td>Humidity</td>
+                    <td>float</td>
+                    <td>any</td>
+                </tr>
+                <tr>
+                    <td>Moisture</td>
+                    <td>float</td>
+                    <td>any</td>
+                </tr>
+                <tr>
+                    <td>Soil type</td>
+                    <td>string</td>
+                    <td>black | sandy | clayey | red | loamy</td>
+                </tr>
+                <tr>
+                    <td>Crop type</td>
+                    <td>string</td>
+                    <td>oil seeds | ground nuts | pulses | millets | barley | sugarcane | maize | cotton | tobacco | paddy | wheat</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p>
+            We employed a Random Forest Classifier to categorize the appropriate fertilizer based on the input features. The Random Forest algorithm, renowned for its robustness and high accuracy, constructs an ensemble of decision trees during training and outputs the mode of the classes for classification tasks. This ensemble technique mitigates overfitting and enhances generalization to unseen data.
+        </p>
+        
+        <p>
+            The model was trained on a heterogeneous dataset comprising various combinations of temperature, humidity, moisture, soil type, and crop type, with the corresponding optimal fertilizer type as the target variable. Feature engineering techniques were applied to encode categorical variables such as soil type and crop type. The model's performance was rigorously evaluated using standard metrics, including accuracy, precision, recall, and F1-score, to ensure robust performance.
+        </p>
+        
+        <p>
+          Upon receiving the input parameters, the trained model predicts the most suitable fertilizer, specifying the type (Urea, DAP, or NPK) and, in the case of NPK, the appropriate ratio of Nitrogen, Phosphorus, and Potassium. This tailored recommendation aids farmers in making data-driven decisions, thereby enhancing crop yield and soil fertility.
+        </p>
+
+        <div class="code-container">
+          <button class="copy-btn" onclick="copyCode()"><img src="{{ url_for('static', filename='images/copy.svg') }}"/></button>
+          <pre class="code-box" id="codeBox">
+            <span>
+            /api/fertilizer?temperature=26&humidity=21&moisture=10&soil_type=Loamy&crop_type=Sugarcane&nitrogen=20&potassium=9&phosphorous=6
+            </span>
+          </pre>
         </div>
-        <div class="about">
-          <img src="{{ url_for('static', filename='images/market.svg') }}" draggable="false" alt="">
-          <div class="aboutText">
-            <h2 class="clr-green-primary subHeading">Market Predictor</h2>
-            <p>With AgroML's market prediction feature, farmers can make informed decisions based on real-time insights into crop prices and market trends. Our model analyzes historical data, weather patterns, and market dynamics to forecast future prices, enabling farmers to strategize their planting schedules and maximize profitability.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+      <h2 id="#conclusion">5. Conclusion</h2>
+      <p>
+        At the event, we had a productive discussion with the judging pannel. The idea we had brought to the table was a good one, we were not ab  le to bag any positions but had many other take-aways:
+      </p>
+      <ul>
+        <li>Farmers in remote regions require technical knowladge</li>
+        <li>Old practices still rule farming practices</li>
+        <li>Agricultural produce can be maximized using diagnostic tools</li>
+        <li>There are vast posibilities of IoT and agriculture</li>
+      </ul>
+      <p>
+        Keeping in mind the scale of the project, and finances we collectively decided to archive the project 
+      </p>
+      <img src="{{ url_for('static', filename='images/final.jpeg') }}"/>
+    </div>
+  </div>
   </body>
 </html>

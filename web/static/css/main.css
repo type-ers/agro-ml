@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+    background-color: #1c2c22;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 200px;
+}
+
+
+.header h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 200px;
+    margin: 0;
+    padding: 0;
+    color: #e7f8ea;
+}
+
+.header span {
+    color: #1b765c;
+}
+
+.hero {
+    width: 80vw;
+}
+
+.hero img {
+    width: 80vw;
+}
+
+.hero a {
+    color: #6ccf90;
+    text-decoration: none;
+}
+
+.hero h2 {
+    color: #1b765c;
+}
+
+.hero p {
+    color: #e7f8ea;
+}
+
+.hero table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.hero th, td {
+    padding: 12px;
+    border: 1px solid #e7f8ea;
+
+    color: #e7f8ea;
+
+    text-align: left;
+}
+
+.hero th {
+    padding: 12px;
+    border: 1px solid #000;
+    color: #000;
+
+    background-color: #e7f8ea;
+}
+
+.hero li {
+    color : #e7f8ea;
+}
+
+  
+.code-container {
+    position: relative;
+    display: inline-block;
+}
+
+.code-box {
+    height: 40px;
+    width: 80vw;
+    background-color: #4d4d4d;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: start; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.code-box span {
+    padding-left: 60px;
+    max-width: 60vw;
+    white-space: wrap; /* Allow wrapping */
+    word-wrap: break-word; /* Ensure words break on smaller screens */
+}
+
+
+.copy-btn {
+    position: absolute;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #4d4d4d;
+    transition: 0.7s ease-in-out;
+}
+
+.copy-btn img {
+    width: 16px;
+}
+
+.copy-btn:hover {
+    background-color: #494949;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .header h1 {
+        font-size: 120px;
+    }
+}

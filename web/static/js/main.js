@@ -1,17 +1,10 @@
-const nav = document.getElementById("navbar");
-const mobileNav = document.querySelector(".mobile-navigation");
-const loginBtn = document.querySelector(".login");
-//navbar
-mobileNav.addEventListener('click', () => {
-    if (nav.getAttribute("data-visible") === "false") {
-        nav.style.transform = "translateX(0%)";
-        nav.setAttribute("data-visible", true);
-    } else {
-        nav.style.transform = "translateX(100%)";
-        nav.setAttribute("data-visible", false);
-    }
-});
-
-loginBtn.addEventListener('click', () => {
-    window.open("./login.html","_blank")
-})
+function copyCode() {
+    const codeBox = document.getElementById('codeBox');
+    const textArea = document.createElement('textarea');
+    textArea.value = codeBox.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    alert("Copied to clipboard!");
+}  

@@ -8,48 +8,37 @@
    
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
 
-    <title>Plant Disease Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Agro-ML | Plant Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/disease.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
         rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/disease.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/diseases.js') }}" defer></script>
 </head>
 <body>
-    <header>
-        <button class="mobile-navigation hide" aria-expanded="false" style="background-color: var(--secondary-bg);"></button>
-        <nav>
-            <ul data-visible="false" class="navbar flex" id="navbar">
-                    <li><a href="/" id="home">Home</a></li>
-                    <li><a href="/disease" target="_blank">Disease Detection</a></li>
-                    <li><a href="/fertilizer" target="_blank">Fertilizer Manager</a></li>
-                    <li><a href="/market" target="_blank">Market Predictor</a></li>
-                </ul>
-        </nav>
-    </header>
-    <section class="fullvh">
-        <div class="fullvh flexCenter col">
-            <form id="diseaseForm" action="/disease" method="POST" enctype="multipart/form-data">
-                <div class="box">
-                    <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
-                    <select name="dropdown" id="dropdown">
-                        <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
-                        <option value="rice">Rice</option>
-                        <option value="potato">Potato</option>
-                        <option value="corn">Corn</option>
-                        <option value="tomato">Tomato</option>
-                        <option value="apple">Apple</option>
-                    </select>
-                </div>
-                <div class="box flex col">
-                    <input type="file" name="image" accept="image/png, image/jpg, image/jpeg">
-                    <input type="submit" value="Submit" class="btn">
-                    <p id="result" style="text-align:center;">Predicted disease: <br><span>{ -- }</span></p>
-                </div>
-            </form>            
+    <div class="wrapper">
+        <a href="/"><div class="header">
+          <h1>Agro-<span>ML</span></h1>
+        </div></a>
+    <form id="diseaseForm" action="/disease" method="POST" enctype="multipart/form-data">
+        <div class="box">
+            <p>Please select a leaf-type<span title="Required" style="color: rgb(230, 0, 0);">*</span></p>
+            <select name="dropdown" id="dropdown">
+                <!-- DEFAULT OPTION BELOW, DO NOT CHANGE -->
+                <option value="rice">Rice</option>
+                <option value="potato">Potato</option>
+                <option value="corn">Corn</option>
+                <option value="tomato">Tomato</option>
+                <option value="apple">Apple</option>
+            </select>
         </div>
-    </section>
+        <div class="box flex col">
+            <input type="file" name="image" accept="image/png, image/jpg, image/jpeg">
+            <input type="submit" value="Submit" class="btn">
+            <p id="result" style="text-align:center;">Predicted disease: <br><span>{ -- }</span></p>
+        </div>
+    </form>
+    </div>           
 </body>
 </html>
