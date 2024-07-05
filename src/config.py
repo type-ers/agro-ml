@@ -4,7 +4,7 @@ import numpy as np
 from flask import *
 
 from os.path import abspath, join
-from os import listdir
+from os import listdir, environ
 from joblib import load
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
