@@ -1,6 +1,6 @@
 from config import *
 
-__app__ = Flask(__name__)
+app = Flask(__name__)
 
 # authentication
 
@@ -26,15 +26,15 @@ for filename in listdir(market_dir):
         except Exception as e:
             print(f"Error loading model '{filename}': {str(e)}")
 
-@__app__.route('/')
+@app.route('/')
 def home():
     return render_template("index.html")
 
-@__app__.route('/disease')
+@app.route('/disease')
 def disease():
     return render_template("disease.html")
 
-@__app__.route('/disease', methods=['POST'])
+@app.route('/disease', methods=['POST'])
 def process_disease_form():
     leaf_type = request.form.get('dropdown')
     file = request.files['image']
@@ -54,7 +54,7 @@ def process_disease_form():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@__app__.route('/api/fertilizer', methods=['GET'])
+@app.route('/api/fertilizer', methods=['GET'])
 def api_fertilizer():
     try:
         temperature = float(request.args.get('temperature'))
@@ -76,7 +76,7 @@ def api_fertilizer():
         return jsonify({"error": str(e)}), 400
 
 
-@__app__.route('/api/market', methods=['GET'])
+@app.route('/api/market', methods=['GET'])
 def api_market():
     commodity = request.args.get('commodity')
     date = request.args.get('date')
@@ -90,9 +90,9 @@ def api_market():
         return jsonify({"error": str(e)}), 400
 
 
-@__app__.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(error):
     return render_template('errors/404.html'), 404
 
 if __name__ == '__main__':
-    __app__.run(port=8000)
+    app.run(port=8000)
